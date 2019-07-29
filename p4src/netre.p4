@@ -78,6 +78,9 @@ struct custom_metadata_t {
     bit<4> meta_count;
     bit<15> meta_bitmap;
     bit<1> meta_remainder;
+
+    bit<32>  fingerprint;
+    bit<256> value;
 }
 
 /*
@@ -394,17 +397,16 @@ apply{
     if( tmp_finger_value == meta.custom_metadata.value) {
         //lst_retrieval('0');
         tokenization1();
-        rst_retrieval();
-        lst_retrieval();           
-        if ( tmp_left_value == meta.custom_metadata.left_value){
-        tokenization0();}
-        if ( tmp_right_value == meta.custom_metadata.right_value){
-        tokenization2();}
-            
-            
-            
+        //rst_retrieval();
+        //lst_retrieval();           
+        if ( tmp_left_value == meta.custom_metadata.left_value) {
+            tokenization0();
+        }
+        if ( tmp_right_value == meta.custom_metadata.right_value) {
+            tokenization2();
         }
     }
+}
 
    
  
@@ -451,7 +453,7 @@ control MyDeparser(packet_out packet, in headers hdr) {
         packet.emit(hdr.token[13]);*/
         
 
-    }
+    }//?? invalid 되어있으면 emit 해도 포함되지 않는건가
 }
 
 /*************************************************************************
