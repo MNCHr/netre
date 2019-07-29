@@ -68,7 +68,6 @@ header token_t {
     bit<16> token_index;
 }
 
-
 struct parser_metadata_t {
     bit<1> enable_tre;
     //bit<4> remaining;
@@ -79,7 +78,7 @@ struct custom_metadata_t {
     bit<15> meta_bitmap;
     bit<1> meta_remainder;
 
-    bit<32>  fingerprint;
+    bit<16>  fingerprint;
     bit<256> value;
 }
 
