@@ -289,13 +289,15 @@ control MyEgress(inout headers hdr,
 #define ENTRY_SIZE 1024
 
 register<bit<256>> (ENTRY_SIZE) fingerprint_store;
-register<bit<256>> (ENTRY_SIZE) left_store;
-register<bit<256>> (ENTRY_SIZE) right_store;
+//register<bit<256>> (ENTRY_SIZE) left_store;
+//register<bit<256>> (ENTRY_SIZE) right_store;
 
     bit<256> tmp_finger_value;
     bit<256> tmp_left_value;
     bit<256> tmp_right_value;
 
+
+//인덱스 만드는거
 action fingerprinting() {
     meta.custom_metadata.value = hdr.chunk[1].payload;
 	hash(meta.custom_metadata.fingerprint, HashAlgorithm.crc32, HASH_BASE, {meta.custom_metadata.value}, HASH_MAX);
@@ -303,90 +305,86 @@ action fingerprinting() {
 	hash(meta.fingerprint[2], HashAlgorithm.crc32, HASH_BASE, {hdr.chunk[7]}, HASH_MAX);
 	hash(meta.fingerprint[3], HashAlgorithm.crc32, HASH_BASE, {hdr.chunk[10]}, HASH_MAX);
 	hash(meta.fingerprint[4], HashAlgorithm.crc32, HASH_BASE, {hdr.chunk[13]}, HASH_MAX); */
-
 }
+
 // Chunk[N + M], N=0, M=1 
 action store_fingerprint() {
-meta.custom_metadata.value = hdr.chunk[1].payload;
-fingerprint_store.write( meta.custom_metadata.fingerprint, meta.custom_metadata.value);
-/*fingerprint_store.write( meta.fingerprint[1], hdr.chunk[4]);
-fingerprint_store.write( meta.fingerprint[2], hdr.chunk[7]);
-fingerprint_store.write( meta.fingerprint[3], hdr.chunk[10]);
-fingerprint_store.write( meta.fingerprint[4], hdr.chunk[13]);*/
-}
+    meta.custom_metadata.value = hdr.chunk[1].payload;
+    fingerprint_store.write( meta.custom_metadata.fingerprint, meta.custom_metadata.value);
+    /*fingerprint_store.write( meta.fingerprint[1], hdr.chunk[4]);
+    fingerprint_store.write( meta.fingerprint[2], hdr.chunk[7]);
+    fingerprint_store.write( meta.fingerprint[3], hdr.chunk[10]);
+    fingerprint_store.write( meta.fingerprint[4], hdr.chunk[13]);*/
+}//핑거프린트값 저장하기 -> 레지스터.wirte(인덱스, 값(=핑거프린트))
 
-
+/*
 action store_lvalue() {
-meta.custom_metadata.left_value = hdr.chunk[0].payload;
-left_store.write( meta.custom_metadata.fingerprint, meta.custom_metadata.left_value);
-/*left_store.write( meta.fingerprint[1], hdr.chunk[3]);
-left_store.write( meta.fingerprint[2], hdr.chunk[6]);
-left_store.write( meta.fingerprint[3], hdr.chunk[9]);
-left_store.write( meta.fingerprint[4], hdr.chunk[12]); */
-}
-
+    meta.custom_metadata.left_value = hdr.chunk[0].payload;
+    left_store.write( meta.custom_metadata.fingerprint, meta.custom_metadata.left_value);
+    left_store.write( meta.fingerprint[1], hdr.chunk[3]);
+    left_store.write( meta.fingerprint[2], hdr.chunk[6]);
+    left_store.write( meta.fingerprint[3], hdr.chunk[9]);
+    left_store.write( meta.fingerprint[4], hdr.chunk[12]); 
+}*/
+/*
 action store_rvalue() {
-meta.custom_metadata.right_value = hdr.chunk[2].payload;
-right_store.write( meta.custom_metadata.fingerprint, meta.custom_metadata.right_value);
-/*right_store.write( meta.fingerprint[1], hdr.chunk[5]);
-right_store.write( meta.fingerprint[2], hdr.chunk[8]);
-right_store.write( meta.fingerprint[3], hdr.chunk[11]);
-right_store.write( meta.fingerprint[4], hdr.chunk[14]);*/
-}
+    meta.custom_metadata.right_value = hdr.chunk[2].payload;
+    right_store.write( meta.custom_metadata.fingerprint, meta.custom_metadata.right_value);
+    right_store.write( meta.fingerprint[1], hdr.chunk[5]);
+    right_store.write( meta.fingerprint[2], hdr.chunk[8]);
+    right_store.write( meta.fingerprint[3], hdr.chunk[11]);
+    right_store.write( meta.fingerprint[4], hdr.chunk[14]);
+}*/
 
 
 action st_retrieval() {
-fingerprint_store.read(tmp_finger_value, meta.custom_metadata.fingerprint);
-/*fignerprint_store.read(tmp_finger_value[1], meta.fingerprint[1]);
-fignerprint_store.read(tmp_finger_value[2], meta.fingerprint[2]);
-fignerprint_store.read(tmp_finger_value[3], meta.fingerprint[3]);
-fignerprint_store.read(tmp_finger_value[4], meta.fingerprint[4]);*/
-}
+    fingerprint_store.read(tmp_finger_value, meta.custom_metadata.fingerprint);
+    /*fignerprint_store.read(tmp_finger_value[1], meta.fingerprint[1]);
+    fignerprint_store.read(tmp_finger_value[2], meta.fingerprint[2]);
+    fignerprint_store.read(tmp_finger_value[3], meta.fingerprint[3]);
+    fignerprint_store.read(tmp_finger_value[4], meta.fingerprint[4]);*/
+}//레지스터에서 값 읽어오기 -> 레지스터.read(임시 저장, 인덱스)
 
-
+/*
 action lst_retrieval() {
-left_store.read(tmp_left_value, meta.custom_metadata.fingerprint);
-/*left_store.read(tmp_left_value[1], meta.fingerprint[1]);
-left_store.read(tmp_left_value[2], meta.fingerprint[2]);
-left_store.read(tmp_left_value[3], meta.fingerprint[3]);
-left_store.read(tmp_left_value[4], meta.fingerprint[4]);*/
-}
-
+    left_store.read(tmp_left_value, meta.custom_metadata.fingerprint);
+    left_store.read(tmp_left_value[1], meta.fingerprint[1]);
+    left_store.read(tmp_left_value[2], meta.fingerprint[2]);
+    left_store.read(tmp_left_value[3], meta.fingerprint[3]);
+    left_store.read(tmp_left_value[4], meta.fingerprint[4]);
+}*/
+/*
 action rst_retrieval() {
-right_store.read(tmp_right_value, meta.custom_metadata.fingerprint);
-/*left_store.read(tmp_left_value[1], meta.fingerprint[1]);
-left_store.read(tmp_left_value[2], meta.fingerprint[2]);
-left_store.read(tmp_left_value[3], meta.fingerprint[3]);
-left_store.read(tmp_left_value[4], meta.fingerprint[4]);*/
-}
+    right_store.read(tmp_right_value, meta.custom_metadata.fingerprint);
+    left_store.read(tmp_left_value[1], meta.fingerprint[1]);
+    left_store.read(tmp_left_value[2], meta.fingerprint[2]);
+    left_store.read(tmp_left_value[3], meta.fingerprint[3]);
+    left_store.read(tmp_left_value[4], meta.fingerprint[4]);
+}*/
 
 action tokenization0() {
-
-hdr.chunk[0].setInvalid();
-hdr.token[0].setValid();
-hdr.token[0].bitmap1 = 1;
-hdr.token[0].index = meta.custom_metadata.fingerprint;
-
+    hdr.chunk[0].setInvalid();
+    hdr.token[0].setValid();
+    hdr.token[0].bitmap1 = 1;
+    hdr.token[0].index = meta.custom_metadata.fingerprint;
 }
+
 action tokenization1() {
-
-hdr.chunk[1].setInvalid();
-hdr.token[1].setValid();
-hdr.token[1].bitmap2 = 0;
-hdr.token[1].index = meta.custom_metadata.fingerprint;
-
+    hdr.chunk[1].setInvalid();
+    hdr.token[1].setValid();
+    hdr.token[1].bitmap2 = 0;
+    hdr.token[1].index = meta.custom_metadata.fingerprint;
 }
+
 action tokenization2() {
-
-hdr.chunk[2].setInvalid();
-hdr.token[2].setValid();
-hdr.token[2].bitmap3 = 0;
-hdr.token[2].index = meta.custom_metadata.fingerprint;
-
+    hdr.chunk[2].setInvalid();
+    hdr.token[2].setValid();
+    hdr.token[2].bitmap3 = 0;
+    hdr.token[2].index = meta.custom_metadata.fingerprint;
 }
+
 apply{
 
-    
     fingerprinting();
     store_fingerprint();
     store_lvalue();
