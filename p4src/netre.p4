@@ -6,9 +6,9 @@
 *********************** H E A D E R S  ***********************************
 *************************************************************************/
 
-#define MAX_LEN 15 
+#define MAX_LEN 5 
 // Mean packet size of standard ipv4 packet 420bytes? from caida
-// 32-byte(256-bit) x 15-chunk
+// 32-byte(256-bit) x 5-chunk = 160-byte
 
 
 
@@ -54,6 +54,7 @@ header udp_t {
     bit<16> checksum;
 }
 
+
 header tre_bitmap_t {
     bit<4> count;
     bit<15> bitmap;
@@ -71,16 +72,22 @@ header token_t {
 struct parser_metadata_t {
     bit<1> enable_tre;
     //bit<4> remaining;
-
 }
 
+struct custom_metadata_t {
+    bit<4> meta_count;
+    bit<15> meta_bitmap;
+    bit<1> meta_remainder;
+}
+
+/*
 struct custom_metadata_t {
     bit<32>  fingerprint;
     bit<256> left_value;
     bit<256> right_value;
     bit<256> value;
 }
-
+*/
 struct metadata {
     parser_metadata_t parser_metadata;
     custom_metadata_t custom_metadata;
@@ -148,20 +155,39 @@ parser MyParser(packet_in packet,
             0 : accept;
         }
     }
-    /////////////////////
+    /////////////////////hdr.tre_bitmap.bitmap enter reversed order
     state parse_tre_bitmap {
         packet.extract(hdr.tre_bitmap);
-        transision select(hdr.tre_bitmap.bitmap){
+        meta.custom_metadata.meta_bitmap = hdr.tre_bitmap.bitmap;
+        transition select(hdr.tre_bitmap.count) {
             0 : parse_chunk;
-            default : parse_bitmap;
+            default : parse_tre_select;
         }
     }
-    state parse_chunk {
-        packet.extract(hdr.chunk.next);
-        meta.parser_metadata.remaining = meta.parser_metadata.remaining - 1;
-        transition select(hdr.tre_bitmap.bitmap) {
+
+    state parse_tre_select {
+        meta.custom_metadata.meta_remainder = 0; //initializing, not necessary ;;
+        meta.custom_metadata.meta_remainder = meta.custom_metadata.meta_bitmap % 2;
+        meta.custom_metadata.count = meta.custom_metadata.count - 1; 
+        transition select(meta.custom_metadata.meta_remainder) {
+            1 : parse_token;
+            0 : parse_chunk;
+        }
+    }
+    state parse_token {
+        meta.custom_metadata.meta_bitmap = meta.custom_metadata.meta_bitmap / 2;
+        packet.extract(hdr.token.next); 
+        transition select(hdr.tre_bitmap.count) {
             0 : accept;
-            default : parse_chunk;
+            default : parse_tre_select;
+        }
+    }
+    state parse_chunk {////////////////////////////////////////////////////////////////////////////////////////
+        meta.custom_metadata.meta_bitmap = meta.custom_metadata.meta_bitmap / 2;
+        packet.extract(hdr.chunk.next);
+        transition select(hdr.tre_bitmap.count) {
+            0 : accept;
+            default : parse_tre_select;
         }
     }
 
@@ -178,7 +204,7 @@ control MyComputeChecksum(inout headers hdr, inout metadata meta) {
 	update_checksum(
 	    hdr.ipv4.isValid(),
             { hdr.ipv4.version,
-	      hdr.ipv4.ihl,
+            hdr.ipv4.ihl,
               hdr.ipv4.diffserv,
               hdr.ipv4.totalLen,
               hdr.ipv4.identification,
@@ -236,12 +262,11 @@ control MyIngress(inout headers hdr,
     }
 
     apply {
-        if (hdr.ipv4.isValid() && hdr.ipv4.ttl > 0){
-
-        ipv4_forwarding.apply();
-
-        }else{
-        NoAction();
+        if (hdr.ipv4.isValid() && hdr.ipv4.ttl > 0) {
+            ipv4_forwarding.apply();
+        }
+        else {
+            NoAction();
         } 
     }
 }
