@@ -58,6 +58,7 @@ header udp_t {
 header tre_bitmap_t {
     bit<4> count;
     bit<15> bitmap;
+    bit<5> f;
 }
 //Min chunk size ? : need 150bytes  <-- ?
 //chunk size 32bytes
@@ -65,12 +66,12 @@ header chunk_t {
     bit<256> chunk_payload;
 }
 header token_t {
-    bit<16> token_index;
+    bit<16> token_index; //?? hash output size is 32-bit
 }
 
 struct parser_metadata_t {
     bit<1> enable_tre;
-    //bit<4> remaining;
+    bit<4> remaining;
 }
 
 struct custom_metadata_t {
@@ -78,7 +79,7 @@ struct custom_metadata_t {
     bit<15> meta_bitmap;
     bit<1> meta_remainder;
 
-    bit<16>  fingerprint;
+    bit<32>  fingerprint;
     bit<256> value;
 }
 
@@ -161,36 +162,51 @@ parser MyParser(packet_in packet,
     state parse_tre_bitmap {
         packet.extract(hdr.tre_bitmap);
         meta.custom_metadata.meta_bitmap = hdr.tre_bitmap.bitmap;
+        meta.custom_metadata.meta_count = hdr.tre_bitmap.count + 1;
+        meta.parser_metadata.remaining = MAX_LEN + 1;
         transition select(hdr.tre_bitmap.count) {
-            0 : parse_chunk;
+            0 : parse_all_chunk;
             default : parse_tre_select;
         }
     }
-
+    ///(mainly) ingress, all chunk, no token
+    state parse_all_chunk {
+        packet.extract(hdr.chunk.next);
+        meta.parser_metadata.remaining = meta.parser_metadata.remaining - 1;
+        transition select(meta.parser_metadata.remaining) {
+            0 : accept;
+            default : parse_all_chunk;
+        }
+    }
+    
+    ///egress router, chunks, tokens mix
     state parse_tre_select {
-        meta.custom_metadata.meta_remainder = 0; //initializing, not necessary ;;
-        meta.custom_metadata.meta_remainder = meta.custom_metadata.meta_bitmap % 2;
-        meta.custom_metadata.count = meta.custom_metadata.count - 1; 
+        meta.custom_metadata.meta_remainder = (bit<1>)(meta.custom_metadata.meta_bitmap % 2);
+        meta.custom_metadata.meta_count = meta.custom_metadata.meta_count - 1; 
+        
         transition select(meta.custom_metadata.meta_remainder) {
             1 : parse_token;
             0 : parse_chunk;
         }
     }
     state parse_token {
+        meta.parser_metadata.remaining = meta.parser_metadata.remaining - 1;
         meta.custom_metadata.meta_bitmap = meta.custom_metadata.meta_bitmap / 2;
         packet.extract(hdr.token.next); 
-        transition select(hdr.tre_bitmap.count) {
-            0 : accept;
+        transition select(meta.custom_metadata.meta_count) {
+            0 : parse_chunk;
             default : parse_tre_select;
         }
     }
-    state parse_chunk {////////////////////////////////////////////////////////////////////////////////////////
+    state parse_chunk {
+        meta.parser_metadata.remaining = meta.parser_metadata.remaining - 1;
         meta.custom_metadata.meta_bitmap = meta.custom_metadata.meta_bitmap / 2;
         packet.extract(hdr.chunk.next);
-        transition select(hdr.tre_bitmap.count) {
+        transition select(meta.parser_metadata.remaining) {
             0 : accept;
             default : parse_tre_select;
         }
+        
     }
 
 }
@@ -241,7 +257,7 @@ control MyIngress(inout headers hdr,
     
 
     action drop() {
-        mark_to_drop();
+        mark_to_drop(standard_metadata);
     }
 
     
@@ -367,8 +383,8 @@ control MyEgress(inout headers hdr,
     action tokenization0() {
         hdr.chunk[0].setInvalid();
         hdr.token[0].setValid();
-        hdr.token[0].bitmap = 1;
-        hdr.token[0].index = meta.custom_metadata.fingerprint;
+        //hdr.token[0].bitmap = 1;
+        //hdr.token[0].index = meta.custom_metadata.fingerprint;
     }
 
     // action tokenization1() {
@@ -399,7 +415,7 @@ control MyEgress(inout headers hdr,
             //rst_retrieval();
             //lst_retrieval();           
             // if ( tmp_left_value == meta.custom_metadata.left_value) {
-            //     tokenization0();
+            //     tokenization0(); 
             // }
             // if ( tmp_right_value == meta.custom_metadata.right_value) {
             //     tokenization2();
