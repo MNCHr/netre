@@ -401,11 +401,11 @@ control MyEgress(inout headers hdr,
     }*/
 
     action tokenization0() {
-        // hdr.u_chunk_token[0].chunk.setInvalid();
-        // hdr.u_chunk_token[0].token.setValid();
+        hdr.u_chunk_token[0].chunk.setInvalid();
+        hdr.u_chunk_token[0].token.setValid();
 
-        hdr.u_chunk_token[0].chunk.setValid();
-        hdr.u_chunk_token[0].token.setInvalid();
+        // hdr.u_chunk_token[0].chunk.setValid();
+        // hdr.u_chunk_token[0].token.setInvalid();
         //hdr.token[0].bitmap = 1;
         //hdr.token[0].index = meta.custom_metadata.fingerprint;
     }
@@ -468,6 +468,11 @@ control MyDeparser(packet_out packet, in headers hdr) {
         packet.emit(hdr.u_chunk_token[1].token);
         packet.emit(hdr.u_chunk_token[2].chunk);
         packet.emit(hdr.u_chunk_token[2].token);
+        packet.emit(hdr.u_chunk_token[3].chunk);
+        packet.emit(hdr.u_chunk_token[3].token);
+        packet.emit(hdr.u_chunk_token[4].chunk);
+        packet.emit(hdr.u_chunk_token[4].token);
+
     /*  packet.emit(hdr.chunk[3]);
         packet.emit(hdr.token[3]);
         packet.emit(hdr.chunk[4]);

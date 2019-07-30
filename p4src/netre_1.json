@@ -1306,7 +1306,7 @@
       "runtime_data" : [],
       "primitives" : [
         {
-          "op" : "add_header",
+          "op" : "remove_header",
           "parameters" : [
             {
               "type" : "header",
@@ -1315,13 +1315,13 @@
           ],
           "source_info" : {
             "filename" : "netre.p4",
-            "line" : 407,
+            "line" : 404,
             "column" : 8,
-            "source_fragment" : "hdr.u_chunk_token[0].chunk.setValid()"
+            "source_fragment" : "hdr.u_chunk_token[0].chunk.setInvalid()"
           }
         },
         {
-          "op" : "remove_header",
+          "op" : "add_header",
           "parameters" : [
             {
               "type" : "header",
@@ -1330,9 +1330,9 @@
           ],
           "source_info" : {
             "filename" : "netre.p4",
-            "line" : 408,
+            "line" : 405,
             "column" : 8,
-            "source_fragment" : "hdr.u_chunk_token[0].token.setInvalid()"
+            "source_fragment" : "hdr.u_chunk_token[0].token.setValid()"
           }
         }
       ]

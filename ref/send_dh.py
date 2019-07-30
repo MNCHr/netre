@@ -62,7 +62,7 @@ class tre_test_hdr(Packet):
 
 def main():
     sel = int(sys.argv[1])
-    iface = "p4p1"
+    iface = "veth0"
     global pkt1, pkt2, pkt3_1, pkt3_2, pkt4, pkt6
 
     pkt1 = Ether(src=get_if_hwaddr(iface), dst='00:00:00:00:00:01') / desc_hdr(vdp_id=1) / arp(opcode=1) 
@@ -103,7 +103,7 @@ def main():
         sendp(pkt4, iface=iface, verbose=False)
         print "sending NAT packet"
     elif sel==6:
-        pkt6 = Ether(src=get_if_hwaddr(iface), dst='00:00:00:00:00:01') / desc_hdr(vdp_id=4) / IP(version=4) / TCP() / tre_test_hdr() / "a123456789b123456789c123456789d123456789e123456789f123456789g123456789h123456789i123456789j123456789"   
+        pkt6 = Ether(src=get_if_hwaddr(iface), dst='00:00:00:00:00:01', type=0x800) / IP(version=4, proto=6) / TCP() / tre_test_hdr(count=3) / "a123456789b123456789c123456789d123456789e123456789f123456789g123456789h123456789i123456789j123456789k123456789l123456789m123456789n123456789o123456789p123456789q123456789r123456789s123456789t123456789u123456789v123456789w123456789x123456789y123456789z123456789"   
         print "sending TRE_test packet"
         pkt6.show()
         hexdump(pkt6)
