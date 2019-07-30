@@ -1,3 +1,5 @@
+count=0, bitmap=0 으로 모두 chunk 인 경우
+
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Processing packet received on port 1
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser 'parser': start
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser 'parser' entering state 'start'
@@ -13,6 +15,7 @@
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Extracting header 'tcp'
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser state 'parse_tcp': key is 01
 [08:39:56.867] [bmv2] [T] [thread 48563] [1.0] [cxt 0] Bytes parsed: 54
+
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser 'parser' entering state 'parse_tre_bitmap'
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Extracting header 'tre_bitmap'
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_bitmap3' from field 'tre_bitmap.bitmap' (0)
@@ -20,31 +23,37 @@
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' to 6
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser state 'parse_tre_bitmap': key is 00
 [08:39:56.867] [bmv2] [T] [thread 48563] [1.0] [cxt 0] Bytes parsed: 57
+
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser 'parser' entering state 'parse_all_chunk'
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Extracting to header union stack 0, next header is 7
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 5
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser state 'parse_all_chunk': key is 05
 [08:39:56.867] [bmv2] [T] [thread 48563] [1.0] [cxt 0] Bytes parsed: 89
+
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser 'parser' entering state 'parse_all_chunk'
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Extracting to header union stack 0, next header is 9
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 4
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser state 'parse_all_chunk': key is 04
 [08:39:56.867] [bmv2] [T] [thread 48563] [1.0] [cxt 0] Bytes parsed: 121
+
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser 'parser' entering state 'parse_all_chunk'
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Extracting to header union stack 0, next header is 11
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 3
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser state 'parse_all_chunk': key is 03
 [08:39:56.867] [bmv2] [T] [thread 48563] [1.0] [cxt 0] Bytes parsed: 153
+
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser 'parser' entering state 'parse_all_chunk'
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Extracting to header union stack 0, next header is 13
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 2
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser state 'parse_all_chunk': key is 02
 [08:39:56.867] [bmv2] [T] [thread 48563] [1.0] [cxt 0] Bytes parsed: 185
+
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser 'parser' entering state 'parse_all_chunk'
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Extracting to header union stack 0, next header is 15
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 1
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser state 'parse_all_chunk': key is 01
 [08:39:56.867] [bmv2] [T] [thread 48563] [1.0] [cxt 0] Bytes parsed: 217
+
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser 'parser' entering state 'parse_all_chunk'
 [08:39:56.867] [bmv2] [E] [thread 48563] [1.0] [cxt 0] Exception while parsing: StackOutOfBounds
 [08:39:56.867] [bmv2] [D] [thread 48563] [1.0] [cxt 0] Parser 'parser': end
