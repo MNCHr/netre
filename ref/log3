@@ -1,0 +1,144 @@
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Processing packet received on port 1
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser': start
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'start'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_enable_tre0' to 1
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting header 'ethernet'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'start': key is 0800
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 14
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting header 'ipv4'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_ipv4': key is 06
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 34
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tcp'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting header 'tcp'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tcp': key is 01
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 54
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tre_bitmap'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting header 'tre_bitmap'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_bitmap3' from field 'tre_bitmap.bitmap' (3)
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_count2' from expression, new value is 3
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' to 6
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tre_bitmap': key is 02
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 57
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tre_select'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_remainder4' from expression, new value is 1
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_count2' from expression, new value is 2
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.tmp' from expression, new value is 1
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tre_select': key is 01
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 57
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_token'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 5
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_bitmap3' from expression, new value is 1
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting to header union stack 0, next header is 8
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_token': key is 02
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 61
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tre_select'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_remainder4' from expression, new value is 1
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_count2' from expression, new value is 1
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.tmp' from expression, new value is 1
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tre_select': key is 01
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 61
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_token'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 4
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_bitmap3' from expression, new value is 0
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting to header union stack 0, next header is 10
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_token': key is 01
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 65
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tre_select'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_remainder4' from expression, new value is 0
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_count2' from expression, new value is 0
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.tmp' from expression, new value is 0
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tre_select': key is 00
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 65
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_chunk'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 3
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_bitmap3' from expression, new value is 0
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting to header union stack 0, next header is 11
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_chunk': key is 03
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 97
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tre_select'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_remainder4' from expression, new value is 0
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_count2' from expression, new value is 15
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.tmp' from expression, new value is 0
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tre_select': key is 00
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 97
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_chunk'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 2
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_bitmap3' from expression, new value is 0
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting to header union stack 0, next header is 13
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_chunk': key is 02
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 129
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tre_select'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_remainder4' from expression, new value is 0
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_count2' from expression, new value is 14
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.tmp' from expression, new value is 0
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tre_select': key is 00
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 129
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_chunk'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 1
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_bitmap3' from expression, new value is 0
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting to header union stack 0, next header is 15
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_chunk': key is 01
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 161
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tre_select'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_remainder4' from expression, new value is 0
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_count2' from expression, new value is 13
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.tmp' from expression, new value is 0
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tre_select': key is 00
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 161
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_chunk'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 0
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_bitmap3' from expression, new value is 0
+[08:47:19.797] [bmv2] [E] [thread 48563] [3.0] [cxt 0] Exception while parsing: StackOutOfBounds
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser': end
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Pipeline 'ingress': start
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] netre.p4(303) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is true
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Applying table 'MyIngress.ipv4_forwarding'
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Looking up key:
+* hdr.ipv4.dstAddr    : 7f000001
+
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Table 'MyIngress.ipv4_forwarding': miss
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Action entry is NoAction - 
+[08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Action NoAction
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Pipeline 'ingress': end
+[08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Egress port is 0
+[08:47:19.797] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Pipeline 'egress': start
+[08:47:19.797] [bmv2] [T] [thread 48564] [3.0] [cxt 0] Applying table 'tbl_fingerprinting'
+[08:47:19.797] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Looking up key:
+
+[08:47:19.797] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Table 'tbl_fingerprinting': miss
+[08:47:19.797] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Action entry is MyEgress.fingerprinting - 
+[08:47:19.797] [bmv2] [T] [thread 48564] [3.0] [cxt 0] Action MyEgress.fingerprinting
+[08:47:19.797] [bmv2] [T] [thread 48564] [3.0] [cxt 0] netre.p4(340) Primitive meta.custom_metadata.value = hdr.u_chunk_token[0].chunk.chunk_payload
+[08:47:19.797] [bmv2] [T] [thread 48564] [3.0] [cxt 0] netre.p4(341) Primitive hash(meta.custom_metadata.fingerprint, HashAlgorithm.crc32, 10w0, {meta.custom_metadata.value}, 10w1023)
+[08:47:19.798] [bmv2] [T] [thread 48564] [3.0] [cxt 0] hash(base=0, max=1023) = 0
+[08:47:19.798] [bmv2] [T] [thread 48564] [3.0] [cxt 0] Applying table 'tbl_store_fingerprint'
+[08:47:19.798] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Looking up key:
+
+[08:47:19.798] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Table 'tbl_store_fingerprint': miss
+[08:47:19.798] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Action entry is MyEgress.store_fingerprint - 
+[08:47:19.798] [bmv2] [T] [thread 48564] [3.0] [cxt 0] Action MyEgress.store_fingerprint
+[08:47:19.798] [bmv2] [T] [thread 48564] [3.0] [cxt 0] netre.p4(350) Primitive meta.custom_metadata.value = hdr.u_chunk_token[0].chunk.chunk_payload
+[08:47:19.798] [bmv2] [T] [thread 48564] [3.0] [cxt 0] netre.p4(351) Primitive fingerprint_store.write( meta.custom_metadata.fingerprint, meta.custom_metadata.value)
+[08:47:19.798] [bmv2] [T] [thread 48564] [3.0] [cxt 0] Wrote register 'MyEgress.fingerprint_store' at index 0 with value 43961268286523729280657103759921471097264417221513230790142110598657266508849
+[08:47:19.798] [bmv2] [T] [thread 48564] [3.0] [cxt 0] Applying table 'tbl_tokenization0'
+[08:47:19.798] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Looking up key:
+
+[08:47:19.799] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Table 'tbl_tokenization0': miss
+[08:47:19.800] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Action entry is MyEgress.tokenization0 - 
+[08:47:19.800] [bmv2] [T] [thread 48564] [3.0] [cxt 0] Action MyEgress.tokenization0
+[08:47:19.800] [bmv2] [T] [thread 48564] [3.0] [cxt 0] netre.p4(404) Primitive hdr.u_chunk_token[0].chunk.setInvalid()
+[08:47:19.800] [bmv2] [T] [thread 48564] [3.0] [cxt 0] netre.p4(405) Primitive hdr.u_chunk_token[0].token.setValid()
+[08:47:19.800] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Pipeline 'egress': end
+[08:47:19.800] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Deparser 'deparser': start
+[08:47:19.800] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Updating checksum 'cksum'
+[08:47:19.800] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Deparsing header 'ethernet'
+[08:47:19.800] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Deparsing header 'ipv4'
+[08:47:19.800] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Deparsing header 'tcp'
+[08:47:19.800] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Deparsing header 'u_chunk_token[0].token'
+[08:47:19.800] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Deparsing header 'u_chunk_token[1].token'
+[08:47:19.800] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Deparsing header 'u_chunk_token[2].chunk'
+[08:47:19.800] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Deparsing header 'u_chunk_token[3].chunk'
+[08:47:19.800] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Deparsing header 'u_chunk_token[4].chunk'
+[08:47:19.800] [bmv2] [D] [thread 48564] [3.0] [cxt 0] Deparser 'deparser': end
+[08:47:19.800] [bmv2] [D] [thread 48568] [3.0] [cxt 0] Transmitting packet of size 314 out of port 0
