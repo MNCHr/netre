@@ -68,10 +68,7 @@ header chunk_t {
 header token_t {
     bit<32> token_index; //?? hash output size is 32-bit
 }
-header_union U_chunk_token {
-    chunk_t chunk;
-    token_t token;
-}
+
 // test// header test_A_t {
 // test//     bit<8> A;
 // test// }
@@ -90,10 +87,9 @@ struct headers {
     tcp_t      tcp;
     udp_t      udp; 
     tre_bitmap_t tre_bitmap;
-    U_chunk_token[MAX_LEN] u_chunk_token;
     //test//U[MAX_LEN] u;
-    // chunk_t[MAX_LEN] chunk;
-    // token_t[MAX_LEN] token;
+    chunk_t[MAX_LEN] chunk;
+    token_t[MAX_LEN] token;
 }
 
 struct parser_metadata_t {
@@ -191,7 +187,7 @@ parser MyParser(packet_in packet,
     }
     ///(mainly) ingress, all chunk, no token
     state parse_all_chunk {
-        packet.extract(hdr.u_chunk_token.next.chunk);
+        packet.extract(hdr.chunk.next);
         meta.parser_metadata.remaining = meta.parser_metadata.remaining - 1;
         transition select(meta.parser_metadata.remaining) {
             0 : accept;
@@ -212,7 +208,7 @@ parser MyParser(packet_in packet,
     state parse_token {
         meta.parser_metadata.remaining = meta.parser_metadata.remaining - 1;
         meta.custom_metadata.meta_bitmap = meta.custom_metadata.meta_bitmap / 2;
-        packet.extract(hdr.u_chunk_token.next.token); 
+        packet.extract(hdr.token.next); 
         transition select(meta.custom_metadata.meta_count) {
             0 : parse_chunk;
             default : parse_tre_select;
@@ -221,7 +217,7 @@ parser MyParser(packet_in packet,
     state parse_chunk {
         meta.parser_metadata.remaining = meta.parser_metadata.remaining - 1;
         meta.custom_metadata.meta_bitmap = meta.custom_metadata.meta_bitmap / 2;
-        packet.extract(hdr.u_chunk_token.next.chunk);
+        packet.extract(hdr.chunk.next);
         transition select(meta.parser_metadata.remaining) {
             0 : accept;
             default : parse_tre_select;
@@ -337,7 +333,7 @@ control MyEgress(inout headers hdr,
 
     //인덱스 만드는거
     action fingerprinting() {
-        meta.custom_metadata.value = hdr.u_chunk_token[0].chunk.chunk_payload;
+        meta.custom_metadata.value = hdr.chunk[1].chunk_payload;
         hash(meta.custom_metadata.fingerprint, HashAlgorithm.crc32, HASH_BASE, {meta.custom_metadata.value}, HASH_MAX);
     /*	hash(meta.fingerprint[1], HashAlgorithm.crc32, HASH_BASE, {hdr.chunk[4]}, HASH_MAX);
         hash(meta.fingerprint[2], HashAlgorithm.crc32, HASH_BASE, {hdr.chunk[7]}, HASH_MAX);
@@ -347,13 +343,13 @@ control MyEgress(inout headers hdr,
 
     // Chunk[N + M], N=0, M=1 
     action store_fingerprint() {
-        meta.custom_metadata.value = hdr.u_chunk_token[0].chunk.chunk_payload;
+        meta.custom_metadata.value = hdr.chunk[1].chunk_payload;
         fingerprint_store.write( meta.custom_metadata.fingerprint, meta.custom_metadata.value);
         /*fingerprint_store.write( meta.fingerprint[1], hdr.chunk[4]);
         fingerprint_store.write( meta.fingerprint[2], hdr.chunk[7]);
         fingerprint_store.write( meta.fingerprint[3], hdr.chunk[10]);
         fingerprint_store.write( meta.fingerprint[4], hdr.chunk[13]);*/
-    }//핑거프린트값 저장하기 -> 레지스터.write(인덱스, 값(=핑거프린트))
+    }//핑거프린트값 저장하기 -> 레지스터.wirte(인덱스, 값(=핑거프린트))
 
     /*
     action store_lvalue() {
@@ -401,11 +397,8 @@ control MyEgress(inout headers hdr,
     }*/
 
     action tokenization0() {
-        // hdr.u_chunk_token[0].chunk.setInvalid();
-        // hdr.u_chunk_token[0].token.setValid();
-
-        hdr.u_chunk_token[0].chunk.setValid();
-        hdr.u_chunk_token[0].token.setInvalid();
+        hdr.chunk[0].setInvalid();
+        hdr.token[0].setValid();
         //hdr.token[0].bitmap = 1;
         //hdr.token[0].index = meta.custom_metadata.fingerprint;
     }
@@ -430,10 +423,9 @@ control MyEgress(inout headers hdr,
         store_fingerprint();
         //store_lvalue();
         //store_rvalue();
-        //st_retrieval(); 
-        tokenization0();
+        st_retrieval(); 
+
         if( tmp_finger_value == meta.custom_metadata.value) {
-            
             //lst_retrieval('0');
             //tokenization1();
             //rst_retrieval();
@@ -462,12 +454,12 @@ control MyDeparser(packet_out packet, in headers hdr) {
         packet.emit(hdr.ipv4);
         packet.emit(hdr.udp);
         packet.emit(hdr.tcp);
-        packet.emit(hdr.u_chunk_token[0].chunk);
-        packet.emit(hdr.u_chunk_token[0].token);
-        packet.emit(hdr.u_chunk_token[1].chunk);
-        packet.emit(hdr.u_chunk_token[1].token);
-        packet.emit(hdr.u_chunk_token[2].chunk);
-        packet.emit(hdr.u_chunk_token[2].token);
+        packet.emit(hdr.chunk[0]);
+        packet.emit(hdr.token[0]);
+        packet.emit(hdr.chunk[1]);
+        packet.emit(hdr.token[1]);
+        packet.emit(hdr.chunk[2]);
+        packet.emit(hdr.token[2]);
     /*  packet.emit(hdr.chunk[3]);
         packet.emit(hdr.token[3]);
         packet.emit(hdr.chunk[4]);
