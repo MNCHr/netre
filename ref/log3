@@ -1,3 +1,4 @@
+count=2, bitmap=0b11 인 처음 두 개가 token 인 상황
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Processing packet received on port 1
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser': start
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'start'
@@ -13,6 +14,7 @@
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting header 'tcp'
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tcp': key is 01
 [08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 54
+
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tre_bitmap'
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting header 'tre_bitmap'
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_bitmap3' from field 'tre_bitmap.bitmap' (3)
@@ -20,72 +22,86 @@
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' to 6
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tre_bitmap': key is 02
 [08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 57
+
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tre_select'
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_remainder4' from expression, new value is 1
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_count2' from expression, new value is 2
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.tmp' from expression, new value is 1
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tre_select': key is 01
 [08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 57
+
+### 왜 union stack이 여기서도 0
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_token'
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 5
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_bitmap3' from expression, new value is 1
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting to header union stack 0, next header is 8
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_token': key is 02
 [08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 61
+
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tre_select'
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_remainder4' from expression, new value is 1
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_count2' from expression, new value is 1
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.tmp' from expression, new value is 1
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tre_select': key is 01
 [08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 61
+
+### 왜 union stack이 여기서도 0 이지?
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_token'
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 4
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_bitmap3' from expression, new value is 0
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting to header union stack 0, next header is 10
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_token': key is 01
 [08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 65
+
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tre_select'
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_remainder4' from expression, new value is 0
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_count2' from expression, new value is 0
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.tmp' from expression, new value is 0
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tre_select': key is 00
 [08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 65
+
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_chunk'
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 3
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_bitmap3' from expression, new value is 0
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting to header union stack 0, next header is 11
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_chunk': key is 03
 [08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 97
+
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tre_select'
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_remainder4' from expression, new value is 0
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_count2' from expression, new value is 15
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.tmp' from expression, new value is 0
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tre_select': key is 00
 [08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 97
+
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_chunk'
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 2
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_bitmap3' from expression, new value is 0
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting to header union stack 0, next header is 13
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_chunk': key is 02
 [08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 129
+
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tre_select'
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_remainder4' from expression, new value is 0
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_count2' from expression, new value is 14
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.tmp' from expression, new value is 0
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tre_select': key is 00
 [08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 129
+
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_chunk'
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 1
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_bitmap3' from expression, new value is 0
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Extracting to header union stack 0, next header is 15
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_chunk': key is 01
 [08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 161
+
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_tre_select'
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_remainder4' from expression, new value is 0
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_count2' from expression, new value is 13
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.tmp' from expression, new value is 0
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser state 'parse_tre_select': key is 00
 [08:47:19.797] [bmv2] [T] [thread 48563] [3.0] [cxt 0] Bytes parsed: 161
+
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser 'parser' entering state 'parse_chunk'
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._parser_metadata_remaining1' from expression, new value is 0
 [08:47:19.797] [bmv2] [D] [thread 48563] [3.0] [cxt 0] Parser set: setting field 'scalars.metadata._custom_metadata_meta_bitmap3' from expression, new value is 0
