@@ -72,6 +72,10 @@ header_union U_chunk_token {
     chunk_t chunk;
     token_t token;
 }
+header test_t {
+    bit<8> test;
+}
+
 // test// header test_A_t {
 // test//     bit<8> A;
 // test// }
@@ -91,6 +95,7 @@ struct headers {
     udp_t      udp; 
     tre_bitmap_t tre_bitmap;
     U_chunk_token[MAX_LEN] u_chunk_token;
+    test_t[8] test;
     //test//U[MAX_LEN] u;
     // chunk_t[MAX_LEN] chunk;
     // token_t[MAX_LEN] token;
@@ -108,6 +113,9 @@ struct custom_metadata_t {
 
     bit<32>  fingerprint;
     bit<256> value;
+    
+    bit<32> test_32;
+    bit<256> test_256;
 }
 
 /*
@@ -213,6 +221,7 @@ parser MyParser(packet_in packet,
         meta.parser_metadata.remaining = meta.parser_metadata.remaining - 1;
         meta.custom_metadata.meta_bitmap = meta.custom_metadata.meta_bitmap / 2;
         packet.extract(hdr.u_chunk_token.next.token); 
+        
         transition select(meta.custom_metadata.meta_count) {
             0 : parse_chunk;
             default : parse_tre_select;
@@ -222,6 +231,7 @@ parser MyParser(packet_in packet,
         meta.parser_metadata.remaining = meta.parser_metadata.remaining - 1;
         meta.custom_metadata.meta_bitmap = meta.custom_metadata.meta_bitmap / 2;
         packet.extract(hdr.u_chunk_token.next.chunk);
+        
         transition select(meta.parser_metadata.remaining) {
             0 : accept;
             default : parse_tre_select;
